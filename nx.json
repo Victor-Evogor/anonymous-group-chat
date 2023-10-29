@@ -1,0 +1,28 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx-cloud",
+      "options": {
+        "cacheableOperations": [
+          "start"
+        ],
+        "accessToken": "NzgwYmY3ZDQtZjYwYS00MjM2LWE3NGEtM2QwNzc0Y2Q3OWM2fHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "targetDefaults": {
+    "compile": {
+      "dependsOn": [
+        "^compile"
+      ]
+    },
+    "start": {
+      "outputs": [
+        "{projectRoot}/dist"
+      ]
+    }
+  },
+  "affected": {
+    "defaultBase": "master"
+  }
+}
