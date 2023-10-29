@@ -2,11 +2,20 @@
 import '@feathersjs/transport-commons'
 import type { Application } from './declarations'
 import {Message} from '../../../types/Message'
+import { RealTimeConnection } from '@feathersjs/transport-commons'
 
 export const channels = (app: Application) => {
 
-  app.service('messages').publish('created', (data: Message & {groupId: string})=>{
+/*   app.service('messages').publish('created', (data: Message & {groupId: string})=>{
     return app.channel(data.groupId).send(data)
+  })
+ */
+
+  app.on('disconnect', ()=>{
+    app.channels.forEach(groupId => {
+      // TODO: change event name, 'new-user' to update-number-of-users
+      app.service('room-membership').emit('new-user', groupId)
+    })
   })
 
   app.service('room-membership').publish('new-user', (groupId?: string)=>{
@@ -15,5 +24,12 @@ export const channels = (app: Application) => {
     }
     const length = app.channel(groupId).length
     return app.channel(groupId).send(length)
+  })
+
+  app.service('room-membership').publish('new-message',(data: any)=>{
+    if(!data){
+      throw new Error('message payload can\'t be undefined')
+    }
+    return app.channel(data.groupId).send(data.body)
   })
 }

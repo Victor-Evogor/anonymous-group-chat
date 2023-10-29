@@ -27,7 +27,7 @@ export const roomMemberShipService = (app: Application) => {
     // A list of all methods this service exposes externally
     methods: roomMemberShipServiceMethods,
     // You can add additional custom events to be sent to clients here
-    events: ['new-user']
+    events: ['new-user', 'new-message']
   })
   // Initialize hooks
 /*   app.service(roomMemberShipServicePath).hooks({

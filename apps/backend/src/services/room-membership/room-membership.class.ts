@@ -1,9 +1,7 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.class.html#database-services
 import type { Params } from '@feathersjs/feathers'
-import { MongoDBService } from '@feathersjs/mongodb'
-import type { MongoDBAdapterParams, MongoDBAdapterOptions } from '@feathersjs/mongodb'
+import type { MongoDBAdapterParams } from '@feathersjs/mongodb'
 
-import type { Application } from '../../declarations'
 import type {
   RoomMemberShipService,
   RoomMemberShipServiceData,
@@ -12,6 +10,7 @@ import type {
 } from './room-membership.schema'
 import { app } from '../../app'
 import { generateRandomString } from '../../../../../utils/generateRandomString'
+import { Message } from '../../../../../types/Message'
 
 export type {
   RoomMemberShipService,
@@ -46,5 +45,13 @@ export class RoomMemberShipServiceService {
 
   async getNumberOfUsers(data: any){
     return app.channel(data.groupId).length
+  }
+
+  async sendMessage(data: {
+    body: Message,
+    groupId: string
+  }){
+    console.log('received message',data)
+    app.service('room-membership').emit('new-message', data)
   }
 }

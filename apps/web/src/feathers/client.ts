@@ -3,16 +3,20 @@ import socketio from '@feathersjs/socketio-client'
 import type { SocketService } from '@feathersjs/socketio-client'
 import io from 'socket.io-client'
 import env from '../../env.json'
+import { Message } from '../../../../types/Message'
 
 export const socket = io(env.feathersServer)
-type payloadData = {
+type PayloadData = {
   groupId: string
 }
 
 type ServiceType = {
   'room-membership': SocketService & {
-    join: (data: payloadData, Params?: Params)=> Promise<{successful: boolean, error?: Error}>,
-    getNumberOfUsers: (data: payloadData) => Promise<number>
+    join: (data: PayloadData, Params?: Params)=> Promise<{successful: boolean, error?: Error}>,
+    getNumberOfUsers: (data: PayloadData) => Promise<number>,
+    sendMessage: (data: PayloadData & {
+      body: Message
+    }) => Promise<void>
   }
 }
 export const client = feathers<ServiceType>()
@@ -23,5 +27,5 @@ client.configure(socketClient)
 
 // Register a socket client service with all methods listed
 client.use('room-membership', socketClient.service('room-membership'), {
-  methods: ['find', 'get', 'create', 'update', 'patch', 'remove', 'join', 'getNumberOfUsers']
+  methods: ['find', 'get', 'create', 'update', 'patch', 'remove', 'join', 'getNumberOfUsers', 'sendMessage']
 })

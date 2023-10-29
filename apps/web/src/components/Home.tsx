@@ -8,11 +8,12 @@ import { useNavigate } from 'react-router-dom'
 export const Home = () => {
   const navigate = useNavigate()
   const inputFieldRef = useRef<HTMLInputElement>()
-  const { setUser } = useContext(userContext)!
+  const { setUser, user } = useContext(userContext)!
 
   const createGroupHandler: MouseEventHandler<HTMLButtonElement> = () => {
     client.service('room-membership').create({}).then(groupId => {
       setUser({
+        ...user,
         id: socket.id,
         groupId
       })
@@ -30,6 +31,7 @@ export const Home = () => {
     }).then(({successful, error})=>{
       if(successful){
         setUser({
+          ...user,
           id: socket.id,
           groupId
         })

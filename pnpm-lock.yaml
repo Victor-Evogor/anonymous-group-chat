@@ -32,6 +32,9 @@ importers:
       moment:
         specifier: ^2.29.4
         version: 2.29.4
+      randomcolor:
+        specifier: ^0.6.2
+        version: 0.6.2
       react-router-dom:
         specifier: ^6.17.0
         version: 6.17.0(react-dom@18.2.0)(react@18.2.0)
@@ -39,6 +42,9 @@ importers:
         specifier: ^4.7.2
         version: 4.7.2
     devDependencies:
+      '@types/randomcolor':
+        specifier: ^0.5.8
+        version: 0.5.8
       nx:
         specifier: 16.10.0
         version: 16.10.0
@@ -4448,6 +4454,10 @@ packages:
   /@types/qs@6.9.9:
     resolution: {integrity: sha512-wYLxw35euwqGvTDx6zfY1vokBFnsK0HNrzc6xNHchxfO2hpuRg74GbkEW7e3sSmPvj0TjCDT1VCa6OtHXnubsg==}
     dev: false
+
+  /@types/randomcolor@0.5.8:
+    resolution: {integrity: sha512-hCajbxWpZsGKf6gHiJyEJPCQ6jJaYYcryqtrXNGFnGjreXyws8xCvVln/Gg6ms/AqNntoFHxa2754E7WhpBTEg==}
+    dev: true
 
   /@types/range-parser@1.2.6:
     resolution: {integrity: sha512-+0autS93xyXizIYiyL02FCY8N+KkKPhILhcUSA276HxzreZ16kl+cmwvV2qAM/PuCCwPXzOXOWhiPcw20uSFcA==}
@@ -12904,6 +12914,10 @@ packages:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
       safe-buffer: 5.2.1
+
+  /randomcolor@0.6.2:
+    resolution: {integrity: sha512-Mn6TbyYpFgwFuQ8KJKqf3bqqY9O1y37/0jgSK/61PUxV4QfIMv0+K2ioq8DfOjkBslcjwSzRfIDEXfzA9aCx7A==}
+    dev: false
 
   /range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}

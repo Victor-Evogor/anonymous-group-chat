@@ -5,6 +5,7 @@ import moment from 'moment'
 import { userContext } from '../contexts/User'
 import { SetStateType } from '../../../../types/SetStateType'
 import { useNavigate } from 'react-router-dom'
+import { client } from '../feathers/client'
 
 
 interface RepliedMessageContextType {
@@ -16,17 +17,14 @@ const repliedMessage = createContext<RepliedMessageContextType | null>(null)
 const MessageComponent: FunctionComponent<Message> = ({
   authorId,
   timestamp,
-  attachment,
-  audio,
-  authorAvatar,
   authorName,
   image,
   message,
-  id
+  id,
+  color
 }) => {
   const time = moment(timestamp).format('h:mm:ss a')
   const { user } = useContext(userContext)!
-  console.log(user.id)
   const isUserMessage = authorId === user.id
   const userColor = '#7180ac'
   const otherUserColor = '#9130ff99'
@@ -37,12 +35,13 @@ const MessageComponent: FunctionComponent<Message> = ({
   const messageBoxStyle: SxProps = {
     justifySelf: isUserMessage ? 'flex-end' : 'flex-start',
     width: 'max-content',
+    minWidth: isUserMessage? 'initial' : '30vw',
+    maxWidth: '40vw',
     backgroundColor: isUserMessage
       ? userColor
       : isMessageBeingRepliedTo
       ? otherUserColorDark
       : otherUserColor,
-    padding: '.2rem 1rem',
     borderRadius: isUserMessage ? '1rem 0 1rem 1rem' : '0 1rem 1rem 1rem'
   }
 
@@ -70,7 +69,9 @@ const MessageComponent: FunctionComponent<Message> = ({
           <Typography
             variant="caption"
             sx={{
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              color,
+              paddingLeft: 1
             }}
           >
             {authorName}
@@ -78,8 +79,22 @@ const MessageComponent: FunctionComponent<Message> = ({
         ) : (
           <></>
         )}
-        <Typography>{message}</Typography>
-        <Typography variant="caption">{time}</Typography>
+        {image?
+          <img src={image} style={{
+            borderTopRightRadius: isUserMessage ? 'inherit' : 0,
+            borderTopLeftRadius: isUserMessage ? 'inherit' : 0,
+            borderBottomRightRadius: 0,
+            borderBottomLeftRadius: 0,
+            width: '100%'
+          }}/>
+        : <></>}
+        <Typography component='div' sx={{
+          margin: '.5rem .6rem',
+          whiteSpace: 'pre-wrap'
+        }}>{message}</Typography>
+        <Typography variant="caption" sx={{
+          margin: '.5rem .6rem'
+        }}>{time}</Typography>
       </Box>
     </Box>
   )
@@ -87,11 +102,14 @@ const MessageComponent: FunctionComponent<Message> = ({
 
 const Messages = () => {
   const [repliedMessageId, setRepliedMessageId] = useState<string>('')
+  const [messages, setMessages] = useState<Message[]>([])
   const Provider = repliedMessage.Provider
-  const messages: Message[] = []
   const { user } = useContext(userContext)!
-  console.log(user.id)
   const navigate = useNavigate()
+  client.service('room-membership').on('new-message', (data: Message)=>{
+    console.log(data)
+    setMessages(messages.concat([data]))
+  })
   messages.sort((prevMessage, currentMessage) => {
     const a = new Date(prevMessage.timestamp).getTime()
     const b = new Date(currentMessage.timestamp).getTime()

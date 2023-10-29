@@ -7,5 +7,6 @@ export interface Message{
     authorAvatar?: string,
     image?: string,
     attachment?: string,
-    audio?: string
+    audio?: string,
+    color?: string
 }

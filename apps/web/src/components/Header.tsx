@@ -1,9 +1,9 @@
 import {
   AppBar,
   Box,
-  Button,
   IconButton,
   Toolbar,
+  Typography,
 } from '@mui/material'
 import { Share } from '@mui/icons-material'
 import { client } from '../feathers/client'
@@ -35,7 +35,9 @@ const Header = () => {
         <Toolbar sx={{
           justifyContent: 'space-between'
         }}>
-        <Button color="inherit">{numberOfUsersOnline} people Online</Button>
+        <Typography color="inherit" sx={{
+          fontSize: 'small'
+        }}>{numberOfUsersOnline === 1? <span>You are the only one here,<br/> click the share icon to copy your chat group link</span>: <span>{numberOfUsersOnline} people Online</span>}</Typography>
           <IconButton
             size="large"
             edge="start"

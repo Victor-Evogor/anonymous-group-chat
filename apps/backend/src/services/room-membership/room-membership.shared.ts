@@ -23,7 +23,7 @@ export type RoomMemberShipServiceClientService = Pick<
 
 export const roomMemberShipServicePath = 'room-membership'
 
-export const roomMemberShipServiceMethods = [ 'create', 'join', 'getNumberOfUsers'] as const
+export const roomMemberShipServiceMethods = [ 'create', 'join', 'getNumberOfUsers', 'sendMessage'] as const
 
 export const roomMemberShipServiceClient = (client: ClientApplication) => {
   const connection = client.get('connection')
