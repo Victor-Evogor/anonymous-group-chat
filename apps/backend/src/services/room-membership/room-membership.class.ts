@@ -9,8 +9,8 @@ import type {
   RoomMemberShipServiceQuery
 } from './room-membership.schema'
 import { app } from '../../app'
-import { generateRandomString } from '../../../../../utils/generateRandomString'
-import { Message } from '../../../../../types/Message'
+import { generateRandomString } from '../../utils/generateRandomString'
+import { Message } from '../../types/Message'
 
 export type {
   RoomMemberShipService,

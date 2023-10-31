@@ -25,7 +25,6 @@ export const Home = () => {
     if (!inputFieldRef.current) return
     if (inputFieldRef.current.value.length < 5) return
     const groupId = inputFieldRef.current.value
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     client.service('room-membership').join({
       groupId
     }).then(({successful, error})=>{

@@ -10,7 +10,7 @@ function App() {
       <UserContextProvider>
         <Routes>
           <Route path="/chat-group" element={<ChatHome />} />
-          <Route path='/join-my-chat-group/:id' element={<ChatHomeRedirect/>}/>
+          <Route path='/chat-group/join/:id' element={<ChatHomeRedirect/>}/>
           <Route path="/" element={<Home />} />
         </Routes>
       </UserContextProvider>

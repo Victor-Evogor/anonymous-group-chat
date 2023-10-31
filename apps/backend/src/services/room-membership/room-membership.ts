@@ -1,18 +1,5 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/service.html
 
-import { hooks as schemaHooks } from '@feathersjs/schema'
-
-import {
-  roomMemberShipServiceDataValidator,
-  roomMemberShipServicePatchValidator,
-  roomMemberShipServiceQueryValidator,
-  roomMemberShipServiceResolver,
-  roomMemberShipServiceExternalResolver,
-  roomMemberShipServiceDataResolver,
-  roomMemberShipServicePatchResolver,
-  roomMemberShipServiceQueryResolver
-} from './room-membership.schema'
-
 import type { Application } from '../../declarations'
 import { RoomMemberShipServiceService } from './room-membership.class'
 import { roomMemberShipServicePath, roomMemberShipServiceMethods } from './room-membership.shared'
@@ -29,42 +16,7 @@ export const roomMemberShipService = (app: Application) => {
     // You can add additional custom events to be sent to clients here
     events: ['new-user', 'new-message']
   })
-  // Initialize hooks
-/*   app.service(roomMemberShipServicePath).hooks({
-    around: {
-      all: [
-        schemaHooks.resolveExternal(roomMemberShipServiceExternalResolver),
-        schemaHooks.resolveResult(roomMemberShipServiceResolver)
-      ]
-    },
-    before: {
-      all: [
-        schemaHooks.validateQuery(roomMemberShipServiceQueryValidator),
-        schemaHooks.resolveQuery(roomMemberShipServiceQueryResolver)
-      ],
-      find: [],
-      get: [],
-      create: [
-        schemaHooks.validateData(roomMemberShipServiceDataValidator),
-        schemaHooks.resolveData(roomMemberShipServiceDataResolver)
-      ],
-      patch: [
-        schemaHooks.validateData(roomMemberShipServicePatchValidator),
-        schemaHooks.resolveData(roomMemberShipServicePatchResolver)
-      ],
-      remove: []
-    },
-    after: {
-      all: []
-    },
-    error: {
-      all: []
-    }
-  })
-}
- */
-// Add this service to the service type index
-}
+ }
 
 declare module '../../declarations' {
   interface ServiceTypes {

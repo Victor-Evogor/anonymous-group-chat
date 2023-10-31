@@ -1,15 +1,8 @@
 // For more information about this file see https://dove.feathersjs.com/guides/cli/channels.html
 import '@feathersjs/transport-commons'
 import type { Application } from './declarations'
-import {Message} from '../../../types/Message'
-import { RealTimeConnection } from '@feathersjs/transport-commons'
 
 export const channels = (app: Application) => {
-
-/*   app.service('messages').publish('created', (data: Message & {groupId: string})=>{
-    return app.channel(data.groupId).send(data)
-  })
- */
 
   app.on('disconnect', ()=>{
     app.channels.forEach(groupId => {

@@ -12,8 +12,6 @@ export type {
   RoomMemberShipServicePatch
 } from './services/room-membership/room-membership.shared'
 
-import { messageClient } from './services/messages/messages.shared'
-export type { Message, MessageData, MessageQuery, MessagePatch } from './services/messages/messages.shared'
 
 export interface Configuration {
   connection: TransportConnection<ServiceTypes>
@@ -41,7 +39,6 @@ export const createClient = <Configuration = any,>(
   client.configure(authenticationClient(authenticationOptions))
   client.set('connection', connection)
 
-  client.configure(messageClient)
   client.configure(roomMemberShipServiceClient)
   return client
 }

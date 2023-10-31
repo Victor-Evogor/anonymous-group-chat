@@ -2,10 +2,9 @@ import {Params, feathers} from '@feathersjs/feathers'
 import socketio from '@feathersjs/socketio-client'
 import type { SocketService } from '@feathersjs/socketio-client'
 import io from 'socket.io-client'
-import env from '../../env.json'
 import { Message } from '../../../../types/Message'
 
-export const socket = io(env.feathersServer)
+export const socket = io(import.meta.env.VITE_SERVER)
 type PayloadData = {
   groupId: string
 }

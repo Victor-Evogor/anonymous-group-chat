@@ -55,7 +55,6 @@ const MessageComponent: FunctionComponent<Message> = ({
       <Box
         sx={messageBoxStyle}
         onDoubleClick={() => {
-          console.log('double click working')
           if (!isUserMessage) {
             if (repliedMessageId === id) {
               setRepliedMessageId('')
